@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stitch Design - Learning App</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+  :root {
+    --primary: #ea2a33;
+  }
+  body {
+    min-height: 100dvh;
+    font-family: "Plus Jakarta Sans","Noto Sans",sans-serif;
+    background: #000;
+    overflow-x: hidden;
+  }
+  .interactive {
+    transition: all 0.25s ease-in-out;
+  }
+  .interactive:hover {
+    transform: scale(1.05);
+  }
+  .interactive:active {
+    transform: scale(0.95);
+  }
+  /* PAGE STYLES */
+  .page {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+  }
+  .page.active {
+    left: 0;
+    opacity: 1;
+  }
+  .page.slide-in-left {
+    left: 0;
+    opacity: 1;
+  }
+  .page.slide-out-left {
+    left: -100%;
+    opacity: 0;
+  }
+  .page.slide-in-right {
+    left: 0;
+    opacity: 1;
+  }
+  .page.slide-out-right {
+    left: 100%;
+    opacity: 0;
+  }
+  .nav-active {
+    color: var(--primary) !important;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body class="bg-black text-white">
+
+<!-- APP CONTAINER -->
+<div id="app" class="relative flex flex-col min-h-screen overflow-hidden">
+
+  <!-- PAGES -->
+  <!-- 1. Landing -->
+  <div id="page-1" class="page active">
+    <div class="relative flex-grow">
+      <div class="w-full h-80 bg-center bg-cover" style="background-image:url('https://picsum.photos/800/400?blur');"></div>
+      <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gray-800 rounded-full p-2 shadow-lg">
+        <div class="bg-red-500 rounded-full p-4 text-white">
+          <span class="material-symbols-outlined !text-4xl">school</span>
+        </div>
+      </div>
+    </div>
+    <div class="px-6 pt-16 pb-8 text-center">
+      <h2 class="text-3xl font-bold">Level Up Your Learning</h2>
+      <p class="mt-4 text-gray-400">Embark on a fun-filled learning adventure with interactive lessons, exciting challenges, and rewarding progress tracking.</p>
+    </div>
+    <div class="px-6 flex flex-col gap-4">
+      <button onclick="goToPage(7,'right')" class="h-14 rounded-xl bg-[var(--primary)] text-lg font-bold interactive">Sign Up</button>
+      <button onclick="goToPage(7,'right')" class="h-14 rounded-xl bg-gray-800 text-lg font-bold interactive">Log In</button>
+    </div>
+  </div>
+
+  <!-- 2. Quiz Example -->
+  <div id="page-2" class="page">
+    <header class="p-4 border-b border-gray-800 flex justify-between items-center">
+      <button onclick="goToPage(7,'left')" class="text-gray-400 interactive">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="text-lg font-bold">Quiz</h2>
+      <div class="w-8"></div>
+    </header>
+    <main class="flex-1 p-6">
+      <h3 class="text-2xl font-bold">What is the capital of France?</h3>
+      <div class="mt-6 flex flex-col gap-4">
+        <label class="interactive rounded-xl border-2 border-transparent p-4 bg-green-600 text-white font-semibold">Paris</label>
+        <label class="interactive rounded-xl border border-gray-700 bg-gray-900 p-4">London</label>
+        <label class="interactive rounded-xl border border-gray-700 bg-gray-900 p-4">Berlin</label>
+        <label class="interactive rounded-xl border border-gray-700 bg-gray-900 p-4">Rome</label>
+      </div>
+    </main>
+    <footer class="p-4 border-t border-gray-800">
+      <button onclick="goToPage(7,'left')" class="w-full h-12 rounded-full bg-[var(--primary)] font-bold interactive">Continue</button>
+    </footer>
+  </div>
+
+  <!-- 7. Games Hub -->
+  <div id="page-7" class="page">
+    <header class="p-4 flex justify-between items-center border-b border-gray-800">
+      <button onclick="goToPage(1,'left')" class="bg-gray-800 p-2 rounded-full interactive">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <h1 class="text-lg font-bold flex-1 text-center">Games</h1>
+      <div class="w-8"></div>
+    </header>
+
+    <div class="p-4 flex-1 overflow-y-auto">
+      <h2 class="text-2xl font-bold mb-4">Quick Games</h2>
+      <div class="flex overflow-x-auto gap-4 pb-4">
+        <div onclick="goToPage(2,'right')" class="min-w-40 rounded-xl bg-gray-900 p-2 shadow interactive cursor-pointer">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?1');"></div>
+          <p class="mt-2 font-bold">Quiz Time</p>
+          <p class="text-gray-400 text-sm">Test your knowledge</p>
+        </div>
+        <div class="min-w-40 rounded-xl bg-gray-900 p-2 shadow interactive">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?2');"></div>
+          <p class="mt-2 font-bold">Memory Match</p>
+          <p class="text-gray-400 text-sm">Boost your memory</p>
+        </div>
+        <div class="min-w-40 rounded-xl bg-gray-900 p-2 shadow interactive">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?3');"></div>
+          <p class="mt-2 font-bold">Puzzle Challenge</p>
+          <p class="text-gray-400 text-sm">Earn rewards</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4 mt-6">Featured Games</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="rounded-xl shadow interactive p-2 bg-gray-900">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?4');"></div>
+          <p class="mt-2 font-semibold">Word Scramble</p>
+          <p class="text-gray-400 text-sm">Unscramble words</p>
+        </div>
+        <div class="rounded-xl shadow interactive p-2 bg-gray-900">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?5');"></div>
+          <p class="mt-2 font-semibold">Code Breaker</p>
+          <p class="text-gray-400 text-sm">Crack the code</p>
+        </div>
+        <div class="rounded-xl shadow interactive p-2 bg-gray-900">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?6');"></div>
+          <p class="mt-2 font-semibold">Math Mania</p>
+          <p class="text-gray-400 text-sm">Solve problems</p>
+        </div>
+        <div class="rounded-xl shadow interactive p-2 bg-gray-900">
+          <div class="aspect-square rounded-lg bg-cover bg-center" style="background-image:url('https://picsum.photos/200/200?7');"></div>
+          <p class="mt-2 font-semibold">History Hunt</p>
+          <p class="text-gray-400 text-sm">Find facts</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky Nav -->
+    <nav class="border-t border-gray-800 bg-black p-2 flex justify-around">
+      <a onclick="goToPage(1,'left')" class="flex flex-col items-center text-gray-400 interactive">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span class="text-xs">Dashboard</span>
+      </a>
+      <a class="flex flex-col items-center text-gray-400 interactive">
+        <span class="material-symbols-outlined">play_circle</span>
+        <span class="text-xs">Courses</span>
+      </a>
+      <a onclick="goToPage(7,'right')" class="flex flex-col items-center nav-active interactive">
+        <span class="material-symbols-outlined">joystick</span>
+        <span class="text-xs">Games</span>
+      </a>
+      <a class="flex flex-col items-center text-gray-400 interactive">
+        <span class="material-symbols-outlined">person</span>
+        <span class="text-xs">Profile</span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script>
+let currentPage = 1;
+
+function goToPage(n, direction = "right") {
+  if (n === currentPage) return;
+  let outgoing = document.getElementById("page-" + currentPage);
+  let incoming = document.getElementById("page-" + n);
+
+  // Reset classes
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("slide-in-left","slide-out-left","slide-in-right","slide-out-right","active"));
+
+  // Animate outgoing
+  if (direction === "right") {
+    outgoing.classList.add("slide-out-left");
+    incoming.classList.add("slide-in-right");
+  } else {
+    outgoing.classList.add("slide-out-right");
+    incoming.classList.add("slide-in-left");
+  }
+
+  incoming.classList.add("active");
+  currentPage = n;
+}
+</script>
+
+</body>
+</html>
